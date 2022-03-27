@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Source Code Analysis</title>
+
+  <script crossorigin src="https://unpkg.com/react@18.0.0-rc.3/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.0.0-rc.3/umd/react-dom.development.js"></script>
+
+  <!-- <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script> -->
+
+  <!-- <script crossorigin src="https://unpkg.com/react@16.14.0/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16.14.0/umd/react-dom.development.js"></script> -->
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+
+    function performLotOfWork() {
+      let i = 0;
+      while (i < 1000000000) {
+        i += 1;
+      }
+    }
+
+    function App() {
+      const [state, setState] = React.useState({ count: 0 });
+      console.log("rerender");
+
+      React.useEffect(() => {
+        console.log("useEffect");
+      });
+
+      // performLotOfWork();
+
+      return React.createElement("div", {
+        onClick: () => {
+          setState(state);
+          // setTimeout(() => {
+          //   console.log(state.count);
+          //   setState({ count: state.count + 1 });
+          //   setState({ count: state.count + 1 });
+          //   setState({ count: state.count + 1 });
+          //   setState({ count: state.count + 1 });
+          //   setState({ count: state.count + 1 });
+          //   setState({ count: state.count + 1 });
+          //   setState({ count: state.count + 1 });
+          //   console.log(state.count);
+          // }, 0);
+        }
+      }, state.count);
+    }
+
+    class App2 extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { count: 0 };
+      }
+
+      shouldComponentUpdate() {
+        return true;
+      }
+
+      render() {
+        console.log("rerender");
+        return React.createElement("div", {
+          onClick: () => {
+            // this.setState(this.state);
+            // this.setState(this.state);
+            setTimeout(() => {
+              console.log(this.state.count);
+              this.setState({ count: this.state.count + 1 });
+              this.setState({ count: this.state.count + 1 });
+              this.setState({ count: this.state.count + 1 });
+              this.setState({ count: this.state.count + 1 });
+              this.setState({ count: this.state.count + 1 });
+              this.setState({ count: this.state.count + 1 });
+              this.setState({ count: this.state.count + 1 });
+              console.log(this.state.count);
+            }, 0);
+          }
+        }, this.state.count);
+      }
+    }
+
+    // ReactDOM.render(React.createElement(App2), document.getElementById("app"));
+
+    const container = document.getElementById('app');
+    const root = ReactDOM.createRoot(container);
+    root.render(React.createElement(App2));
+
+  </script>
+</body>
+
+</html>
