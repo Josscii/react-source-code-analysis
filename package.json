@@ -20,7 +20,9 @@
   "homepage": "https://github.com/Josscii/react-source-code-analysis#readme",
   "dependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-redux": "^8.0.0",
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "parcel": "^2.4.0"
